@@ -173,7 +173,7 @@ class Game:
             while called_color not in ['.r', '.y', '.g', '.b']:
                 print('Invalid input. Choose one from ".r", ".y", ".g", and ".b" (without quotations).')
                 calledColor = input().lower()
-            i = ['r', 'y', 'g', 'b'].index(called_color[0])
+            i = ['.r', '.y', '.g', '.b'].index(called_color[0])
             self.wild_color = CardColor(i+1)
 
     def __init_deck__(self):
