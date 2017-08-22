@@ -169,7 +169,7 @@ class Card:
         Return:
         int
         """
-        return self.color.value*100+self.type.value
+        return self.color.value * 100 + self.type.value
         
 
 class Player:
@@ -207,7 +207,7 @@ class Player:
         """Prints all cards the player has in hand."""
         index = 1
         for card in self.cards:
-            print(str(index)+"."+str(card), end="  ")
+            print(str(index) + "." + str(card), end="  ")
             index += 1
         print()
 
@@ -310,11 +310,11 @@ class Game:
             self.__next_turn__()
         elif self.discard[-1].get_type() == CardType["WILD"]:
             print("Discarded card is a wild card. Choose a color by \".<first "
-                  +"letter of color>\" format (without quotations).")
+                  + "letter of color>\" format (without quotations).")
             called_color = input().lower()
             while called_color not in [".r", ".y", ".g", ".b"]:
                 print("Invalid input. Choose one from \".r\", \".y\", \".g\", "
-                      +"and \".b\" (without quotations).")
+                      + "and \".b\" (without quotations).")
                 calledColor = input().lower()
             i = [".r", ".y", ".g", ".b"].index(called_color)
             self.wild_color = CardColor(i+1)
@@ -418,7 +418,7 @@ class Game:
         # Skip card
         if card.get_type() == CardType["SKIP"]:
             self.__next_turn__()
-            print("Player "+str(self.turn+1)+" is skipped.")
+            print("Player " + str(self.turn+1) + " is skipped.")
             self.__next_turn__()
             self.wild_color == CardColor["BLACK"]
         # Draw Two card
@@ -441,7 +441,7 @@ class Game:
             # Acts the same way as Skip card if there are only two players
             if len(self.players) == 2:
                 self.__next_turn__()
-                print("Player "+str(self.turn+1)+" is skipped.")
+                print("Player " + str(self.turn+1) + " is skipped.")
                 self.__next_turn__()
             else:
                 print("Order is reversed.")
@@ -454,7 +454,7 @@ class Game:
         # Wild card
         elif card.get_type() == CardType["WILD"]:
             print("Choose a color for wild card (\".r\", \".y\", \".g\", or \""
-                  +".b\")")
+                  + ".b\")")
             color = input().split()[0]
             while color not in [".r", ".y", ".g", ".b"]:
                 print("Invalid input.")
@@ -479,7 +479,7 @@ class Game:
                     break
             # Choose colour for wild
             print("Choose a color for wild card (\".r\", \".y\", \".g\", or \"."
-                  +"b\")")
+                  + "b\")")
             color = input().split()[0]
             while color not in [".r", ".y", ".g", ".b"]:
                 print("Invalid input.")
@@ -490,7 +490,7 @@ class Game:
             # Gives next player an opportunity to challenge
             self.__next_turn__()
             print("Will Player "
-                  +str(self.turn+1)
+                  + str(self.turn + 1)
                   + " challenge the Wild Draw Four?")
             print("Answer by yes (\".y\") or no (\".n\").")
             answer = input().split()[0]
@@ -499,13 +499,13 @@ class Game:
                 answer = input().split()[0]
             # If challenged
             if answer == ".y":
-                print("Player "+str(challenged_index+1)+"'s cards are:")
+                print("Player " + str(challenged_index + 1) + "'s cards are:")
                 self.players[challenged_index].print_cards()
                 self.players[challenged_index].shuffle_cards()
                 # If challenge is not successful
                 if is_legal_wd4:
                     print("The Wild Draw Four was legal.")            
-                    print("Player "+str(self.turn+1)+" draws ", end="")
+                    print("Player " + str(self.turn+1) + " draws ", end="")
                     for i in range(6):
                         self.__give_topdeck_to_player__(self.players[self.turn])
                         print(str(self.players[self.turn].get_cards()[-1]),
@@ -517,7 +517,8 @@ class Game:
                 # If challenge is successful
                 else:
                     print("The Wild Draw Four was illegal.")
-                    print("Player "+str(challenged_index+1)+" draws ", end="")
+                    print("Player " + str(challenged_index + 1) + " draws ",
+                          end="")
                     for i in range(4):
                         self.__give_topdeck_to_player__(
                             self.players[challenged_index])
@@ -526,11 +527,11 @@ class Game:
                             end="")
                         if i < 3:
                             print(", ", end="")
-                    print(".\nPlayer "+str(self.turn+1)+" is skipped.")
+                    print(".\nPlayer " + str(self.turn + 1) + " is skipped.")
                     self.players[challenged_index].sort_cards()
             # If not challenged
             else:
-                print("Player "+str(self.turn+1)+" draws ", end="")
+                print("Player " + str(self.turn + 1) + " draws ", end="")
                 for i in range(4):
                     self.__give_topdeck_to_player__(self.players[self.turn])
                     print(str(self.players[self.turn].get_cards()[-1]), end="")
@@ -555,9 +556,9 @@ class Game:
         bool: False if the game has ended this turn, True otherwise
         """
         print("----------")
-        print("Player "+str(self.turn+1)+"'s turn.")
+        print("Player " + str(self.turn + 1) + "'s turn.")
         self.players[self.turn].print_cards()
-        print("Top card: "+str(self.discard[-1]), end="")
+        print("Top card: " + str(self.discard[-1]), end="")
         # Print the color called for Wild card (if applicable)
         if self.discard[-1].get_color() == CardColor["BLACK"]:
             if self.wild_color == CardColor["RED"]:
@@ -603,7 +604,7 @@ class Game:
                     self.__next_turn__()
                     return True
                 new_card = self.players[self.turn].get_cards()[-1]
-                print("You have drawn card: "+str(new_card))
+                print("You have drawn card: " + str(new_card))
                 print("Keep(\".k\") or play(\".p\")?")
                 choice = input()
                 while choice.split()[0] not in [".k", ".p"]:
@@ -661,10 +662,10 @@ class Game:
                     score += 50
         self.players[self.winner_index].add_score(score)
         print("Player "
-              +str(self.winner_index+1)
-              +" earns "
-              +str(score)
-              +" points!")
+              + str(self.winner_index+1)
+              + " earns "
+              + str(score)
+              + " points!")
         return self.winner_index
 
 
