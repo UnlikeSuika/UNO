@@ -315,7 +315,7 @@ class Game:
             while called_color not in [".r", ".y", ".g", ".b"]:
                 print("Invalid input. Choose one from \".r\", \".y\", \".g\", "
                       + "and \".b\" (without quotations).")
-                calledColor = input().lower()
+                called_color = input().lower()
             i = [".r", ".y", ".g", ".b"].index(called_color)
             self.wild_color = CardColor(i+1)
 
@@ -501,7 +501,6 @@ class Game:
             if answer == ".y":
                 print("Player " + str(challenged_index + 1) + "'s cards are:")
                 self.players[challenged_index].print_cards()
-                self.players[challenged_index].shuffle_cards()
                 # If challenge is not successful
                 if is_legal_wd4:
                     print("The Wild Draw Four was legal.")            
@@ -546,6 +545,7 @@ class Game:
         # If the player wins the match
         if not self.players[turn_before].get_cards():
             self.winner_index = turn_before
+			self.wild_color = CardColor["BLACK"]
             return False
         return True
 
@@ -583,8 +583,6 @@ class Game:
                     continue
                 try:
                     index = int(eval(move[1])) - 1
-                except KeyboardInterrupt:
-                    return
                 except:
                     print("Invalid input.")
                     continue
